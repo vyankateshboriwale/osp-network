@@ -1,0 +1,24 @@
+---
+# tasks file for osp-example-
+- os_network:
+    cloud: ospcloud
+    state: present
+    name: ext_network
+    external: true
+
+- os_subnet:
+    cloud: ospcloud
+    state: present
+    network_name: ext_network
+    name: external_subnet
+    cidr: 10.10.10.0/24
+    dns_nameservers:
+        - 8.8.8.7
+        - 8.8.8.8
+    host_routes:
+        - destination: 0.0.0.0/0
+          nexthop: 10.10.10.10
+        - destination: 192.168.0.0
+          nexthop: 192.168.0.0
+
+
